@@ -16,11 +16,12 @@ async function startServer() {
 
   // Initialize Gemini AI
   const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+  const MODEL = 'gemini-2.0-flash-lite';
 
   // --- API routes ---
 
   app.get("/api/health", (req, res) => {
-    res.json({ status: "ok" });
+    res.json({ status: "ok", model: MODEL });
   });
 
   // POST /api/generateTasteDNA
@@ -40,7 +41,7 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no expla
   "confidence": 0.85
 }`;
       const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
+        model: MODEL,
         contents: prompt,
       });
       const text = response.text || '{}';
@@ -75,7 +76,7 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no expla
   "recommendations": ["string"]
 }`;
       const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
+        model: MODEL,
         contents: [
           {
             role: 'user',
@@ -118,7 +119,7 @@ Return ONLY a valid JSON array of 3 design concept objects (no markdown, no expl
   }
 ]`;
       const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
+        model: MODEL,
         contents: prompt,
       });
       const text = response.text || '[]';
@@ -158,7 +159,7 @@ Return ONLY a valid JSON object (no markdown, no explanation):
   "professionals": ["string"]
 }`;
       const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
+        model: MODEL,
         contents: prompt,
       });
       const text = response.text || '{}';
@@ -188,7 +189,7 @@ Return ONLY a valid JSON object (no markdown):
   "colorHighlights": ["string"]
 }`;
       const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
+        model: MODEL,
         contents: prompt,
       });
       const text = response.text || '{}';

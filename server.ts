@@ -15,9 +15,8 @@ async function startServer() {
   app.use(express.json({ limit: '20mb' }));
 
   // Initialize Gemini AI
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' }, vertexai: false });
-  const MODEL = 'gemini-2.5-flash';
-  // --- API routes ---
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '', vertexai: false });
+  const MODEL = 'gemini-2.5-flash';  // --- API routes ---
 
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", model: MODEL });

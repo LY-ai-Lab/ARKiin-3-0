@@ -20,8 +20,9 @@ async function startServer() {
   const PORT = Number(process.env.PORT) || 3000;
   app.use(express.json({ limit: '25mb' }));
 
-  const ai new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+  const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');  
   const MODEL = 'gemini-1.5-flash';
+  
 
   // ── Health ──────────────────────────────────────────────────────────────────
   app.get('/api/health', (_req, res) => {
